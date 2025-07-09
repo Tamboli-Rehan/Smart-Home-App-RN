@@ -1,50 +1,72 @@
-# Welcome to your Expo app 👋
+# 🔌 Smart Home Control Panel
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern and interactive Smart Home mobile application built using **React Native** and **Firebase**. This app allows users to control devices room-wise, view weather updates, and monitor energy usage in a clean, responsive UI.
 
-## Get started
+---
 
-1. Install dependencies
+## 📱 Features
 
-   ```bash
-   npm install
-   ```
+### 🏠 Dashboard
 
-2. Start the app
+- Dynamic greeting based on time of day (Good Morning, Good Evening)
+- Displays current temperature from [OpenWeatherMap API](https://openweathermap.org/api)
+- Mocked energy usage summary
+- Visually appealing UI inspired by modern smart home apps
 
-   ```bash
-   npx expo start
-   ```
+### 🛋️ Room Management
 
-In the output, you'll find options to open the app in a
+- Horizontally scrollable room selector
+- Each card displays:
+  - Room name
+  - Active device count
+  - Background image/icon
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### 💡 Device Control
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- Room-wise device grid
+- Toggle switch to turn devices on/off
+- Temperature control for AC/Refrigerator/Thermostat devices
+- Smooth UI feedback and transitions
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 🛠️ Tech Stack
+
+| Layer      | Tech Used                     |
+| ---------- | ----------------------------- |
+| Frontend   | React Native                  |
+| Auth       | Firebase Authentication       |
+| Database   | Firestore                     |
+| State Mgmt | useState, Context API         |
+| API        | OpenWeatherMap (Live Weather) |
+| Styling    | StyleSheet, custom components |
+
+---
+
+## 📂 Project Structure
 
 ```bash
-npm run reset-project
+my-app/
+│
+├── assets/                # Images, fonts, splash icons
+├── components/            # Reusable UI components
+├── config/                # Firebase & API configs
+├── screens/               # App screens (Dashboard, Rooms)
+├── App.js                 # Entry point
+├── README.md              # Project documentation
+└── ...
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🚀 Getting Started
 
-## Learn more
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/Smart-Home-App-RN.git
+   cd Smart-Home-App-RN
+   ```
+   npm install
+   npx expo start
 
-To learn more about developing your project with Expo, look at the following resources:
+NOTE: This app was developed solely for evaluation purposes and is not intended for production use.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Happy Coding 💫💫💫
