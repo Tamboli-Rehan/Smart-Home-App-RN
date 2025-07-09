@@ -1,8 +1,10 @@
 // Inside SmartHomeApp.js
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import {
+  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
@@ -128,7 +130,7 @@ export function SmartHomeApp() {
       isOn: false,
       value: "20°C",
     },
-    console.log("DevicesLength", devices.length),
+    // console.log("DevicesLength", devices.length),
   ]);
 
   useEffect(() => {
@@ -215,53 +217,62 @@ export function SmartHomeApp() {
     },
   ];
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerTitle}>🏠 Smart Home</Text>
-        <View style={styles.headerControls}>
-          <TouchableOpacity
-            style={styles.unitBtn}
-            onPress={toggleTemperatureUnit}
-          >
-            <Text style={styles.unitBtnText}>°{temperatureUnit}</Text>
-          </TouchableOpacity>
-          <SignOutButton />
-        </View>
-      </View>
+    <ImageBackground
+      source={require("../assets/images/appBg.jpg")} // 👈 Use your background image path
+      style={{ flex: 1, paddingTop: StatusBar.currentHeight }}
 
-      <View style={styles.content}>
-        <Dashboard
-          temperatureUnit={temperatureUnit}
-          activeCounts={activeDeviceCounts}
-          devices={devices}
-        />
-        <RoomSelector
-          rooms={staticRooms}
-          selectedRoom={selectedRoom}
-          onRoomSelect={setSelectedRoom}
-          activeCounts={activeDeviceCounts}
-        />
-        <DeviceGrid
-          devices={filteredDevices}
-          selectedRoom={selectedRoom}
-          temperatureUnit={temperatureUnit}
-          onToggle={handleToggleDevice}
-          onChangeTemperature={handleChangeTemperature}
-        />
-      </View>
-    </ScrollView>
+      // resizeMode="cover"
+    >
+      <ScrollView style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>🏠 Smart Home</Text>
+          <View style={styles.headerControls}>
+            <TouchableOpacity
+              style={styles.unitBtn}
+              onPress={toggleTemperatureUnit}
+            >
+              <Text style={styles.unitBtnText}>°{temperatureUnit}</Text>
+            </TouchableOpacity>
+            <SignOutButton />
+          </View>
+        </View>
+
+        <View style={styles.content}>
+          <Dashboard
+            temperatureUnit={temperatureUnit}
+            activeCounts={activeDeviceCounts}
+            devices={devices}
+          />
+          <RoomSelector
+            rooms={staticRooms}
+            selectedRoom={selectedRoom}
+            onRoomSelect={setSelectedRoom}
+            activeCounts={activeDeviceCounts}
+          />
+          <DeviceGrid
+            devices={filteredDevices}
+            selectedRoom={selectedRoom}
+            temperatureUnit={temperatureUnit}
+            onToggle={handleToggleDevice}
+            onChangeTemperature={handleChangeTemperature}
+          />
+        </View>
+      </ScrollView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#111827",
+    flexGrow: 1,
+    // backgroundColor: "#111827",
   },
   header: {
+    paddingTop: StatusBar.currentHeight,
+    height: 64 + (StatusBar.currentHeight || 0),
+    paddingHorizontal: 16,
     flexDirection: "row",
     justifyContent: "space-between",
-    padding: 16,
     alignItems: "center",
     backgroundColor: "rgba(0,0,0,0.5)",
     borderBottomWidth: 1,

@@ -1,6 +1,14 @@
+import { StatusBar } from "expo-status-bar";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ImageBackground,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import Toast from "react-native-toast-message";
 import { SignInForm } from "../components/SignInForm";
 import { SmartHomeApp } from "../components/SmartHomeApp";
@@ -18,24 +26,35 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent={true}
+      />
       {user ? (
         <SmartHomeApp />
       ) : (
         <ScrollView contentContainerStyle={styles.unauthWrapper}>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>Smart Home</Text>
-          </View>
-          <View style={styles.main}>
-            <View style={styles.contentBox}>
-              <View style={styles.titleBox}>
-                <Text style={styles.mainTitle}>🏠 Smart Home</Text>
-                <Text style={styles.subTitle}>
-                  Sign in to control your devices
-                </Text>
-              </View>
-              <SignInForm />
+          <ImageBackground
+            source={require("../assets/images/signInBg.jpg")} // 👈 Use your background image path
+            style={{ flex: 1, paddingTop: StatusBar.currentHeight }}
+            resizeMode="cover"
+          >
+            <View style={styles.header}>
+              <Text style={styles.headerText}>Smart Home</Text>
             </View>
-          </View>
+            <View style={styles.main}>
+              <View style={styles.contentBox}>
+                <View style={styles.titleBox}>
+                  <Text style={styles.mainTitle}>🏠 Smart Home</Text>
+                  <Text style={styles.subTitle}>
+                    Sign in to control your devices
+                  </Text>
+                </View>
+                <SignInForm />
+              </View>
+            </View>
+          </ImageBackground>
         </ScrollView>
       )}
       <Toast />
@@ -54,7 +73,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#1e3a8a",
   },
   header: {
-    height: 64,
+    paddingTop: StatusBar.currentHeight,
+    height: 64 + (StatusBar.currentHeight || 0),
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(255, 255, 255, 0.1)",
@@ -64,7 +84,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     fontWeight: "600",
-    color: "#FFFFFF",
+    color: "white",
   },
   main: {
     flex: 1,
@@ -84,7 +104,7 @@ const styles = StyleSheet.create({
   mainTitle: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#FFFFFF",
+    color: "white",
     marginBottom: 8,
   },
   subTitle: {

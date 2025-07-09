@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     borderColor: "rgba(96,165,250,0.7)",
   },
   deviceOff: {
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(255, 255, 255, 0.20)",
     borderColor: "rgba(255,255,255,0.2)",
   },
   deviceIcon: {

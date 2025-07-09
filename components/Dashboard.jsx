@@ -1,14 +1,14 @@
 import * as Location from "expo-location";
 import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ImageBackground, StyleSheet, Text, View } from "react-native";
 import { auth, db } from "../config/firebaseConfig";
 
 export function Dashboard({ temperatureUnit, activeCounts, devices }) {
   const [greeting, setGreeting] = useState("");
   const [weather, setWeather] = useState(null);
   const [userName, setUserName] = useState("");
-
+  console.log("Devices and activecounts:------->", devices, activeCounts);
   // Set greeting based on time
   useEffect(() => {
     const hour = new Date().getHours();
@@ -91,12 +91,34 @@ export function Dashboard({ temperatureUnit, activeCounts, devices }) {
     return Math.round(temp);
   };
 
+  function getWeatherEmoji(condition) {
+    switch (condition) {
+      case "Clear":
+        return "☀️";
+      case "Clouds":
+        return "☁️";
+      case "Rain":
+      case "Drizzle":
+        return "🌧️";
+      case "Thunderstorm":
+        return "⛈️";
+      case "Snow":
+        return "❄️";
+      case "Mist":
+      case "Fog":
+      case "Haze":
+        return "🌫️";
+      default:
+        return "🌈"; // fallback
+    }
+  }
+
   return (
     <View style={styles.container}>
       {/* Greeting */}
       <View style={styles.centerText}>
         <Text style={styles.greeting}>
-          {greeting} {userName}!
+          {greeting} {userName} 💫
         </Text>
         <Text style={styles.subGreeting}>Welcome to your smart home</Text>
       </View>
@@ -104,33 +126,72 @@ export function Dashboard({ temperatureUnit, activeCounts, devices }) {
       {/* Cards */}
       <View style={styles.cardsContainer}>
         {/* Weather */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Weather</Text>
-          <Text style={styles.cardValue}>
-            {weather
-              ? `${convertTemperature(weather.temperature)}°${temperatureUnit}`
-              : "--°"}
-          </Text>
-          <Text style={styles.cardSub}>
-            {weather?.condition || "Loading..."}
-          </Text>
-        </View>
+        <ImageBackground
+          source={require("../assets/images/weatherBg.jpg")}
+          style={{
+            width: "100%",
+            height: 200,
+            justifyContent: "flex-end",
+            borderRadius: 12,
+            overflow: "hidden",
+          }}
+        >
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Weather</Text>
+            <Text style={styles.cardValue}>
+              {weather
+                ? `${convertTemperature(
+                    weather.temperature
+                  )}°${temperatureUnit}`
+                : "--°"}
+            </Text>
+
+            {/* Weather condition text + emoji */}
+            <Text style={styles.cardSub}>
+              {weather?.condition
+                ? `${getWeatherEmoji(weather.condition)} ${weather.condition}`
+                : "Loading..."}
+            </Text>
+          </View>
+        </ImageBackground>
 
         {/* Active Devices */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Active Devices</Text>
-          <Text style={styles.cardValue}>
-            {/* {activeCounts}/{devices} */}
-          </Text>
-          <Text style={styles.cardSub}>Devices online</Text>
-        </View>
+        <ImageBackground
+          source={require("../assets/images/activeDevicesBg.jpg")}
+          style={{
+            width: "100%",
+            height: 200,
+            justifyContent: "flex-end",
+            borderRadius: 12,
+            overflow: "hidden",
+          }}
+        >
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Active Devices</Text>
+            <Text style={styles.cardValue}>
+              {activeCounts["All"] || 0} / {devices.length}
+            </Text>
+            <Text style={styles.cardSub}>Devices online</Text>
+          </View>
+        </ImageBackground>
 
         {/* Energy Usage */}
-        <View style={styles.card}>
-          <Text style={styles.cardTitle}>Energy Usage</Text>
-          {/* <Text style={styles.cardValue}>{energyUsage}%</Text> */}
-          <Text style={styles.cardSub}>Of capacity</Text>
-        </View>
+        <ImageBackground
+          source={require("../assets/images/energyUsageBg.jpg")}
+          style={{
+            width: "100%",
+            height: 200,
+            justifyContent: "flex-end",
+            borderRadius: 12,
+            overflow: "hidden",
+          }}
+        >
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>Energy Usage</Text>
+            {/* <Text style={styles.cardValue}>{energyUsage}%</Text> */}
+            <Text style={styles.cardSub}>Of capacity</Text>
+          </View>
+        </ImageBackground>
       </View>
     </View>
   );
@@ -143,13 +204,13 @@ const styles = StyleSheet.create({
   subGreeting: { fontSize: 14, color: "#ccc" },
   cardsContainer: { gap: 16 },
   card: {
-    backgroundColor: "rgba(255,255,255,0.05)",
     padding: 16,
     borderRadius: 12,
     borderColor: "rgba(255,255,255,0.2)",
     borderWidth: 1,
+    backgroundColor: "rgba(0,0,0,0.4)",
   },
-  cardTitle: { fontSize: 14, color: "#ccc" },
-  cardValue: { fontSize: 24, fontWeight: "bold", color: "#fff" },
-  cardSub: { fontSize: 12, color: "#aaa" },
+  cardTitle: { fontSize: 14, color: "white", fontWeight: "bold" },
+  cardValue: { fontSize: 24, fontWeight: "bold", color: "white" },
+  cardSub: { fontSize: 12, color: "white", fontWeight: "bold" },
 });

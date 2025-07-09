@@ -52,8 +52,8 @@ export const SignInForm = () => {
     } catch (error) {
       Toast.show({
         type: "error",
-        text1: "Authentication Error",
-        text2: error.message,
+        text1: "Login Failed",
+        text2: "We couldn't find an account with those credentials.",
       });
       console.error("Authentication error:", error);
     } finally {
@@ -69,7 +69,7 @@ export const SignInForm = () => {
 
       {step === "signUp" && (
         <TextInput
-          style={styles.input}
+          style={[styles.input, { color: "white" }]}
           placeholder="Name"
           value={name}
           onChangeText={setName}
@@ -78,7 +78,7 @@ export const SignInForm = () => {
       )}
 
       <TextInput
-        style={styles.input}
+        style={[styles.input, { color: "white" }]}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
@@ -88,7 +88,7 @@ export const SignInForm = () => {
       />
 
       <TextInput
-        style={styles.input}
+        style={[styles.input, { color: "white" }]}
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
@@ -109,6 +109,7 @@ export const SignInForm = () => {
         }
         onPress={handleSubmit}
         disabled={loading}
+        color="#800000"
       />
 
       <TouchableOpacity onPress={toggleStep} style={styles.toggle}>
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    color: "#fff",
+    color: "white",
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 16,
@@ -142,18 +143,18 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
-    color: "#fff",
+    color: "white",
     padding: 10,
     marginBottom: 12,
     borderRadius: 8,
-    backgroundColor: "rgba(255,255,255,0.05)",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
   },
   toggle: {
     marginTop: 12,
     alignItems: "center",
   },
   toggleText: {
-    color: "#ccc",
+    color: "white",
     fontSize: 14,
     textDecorationLine: "underline",
   },
