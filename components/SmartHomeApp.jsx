@@ -1,5 +1,3 @@
-// Inside SmartHomeApp.js
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
@@ -218,7 +216,7 @@ export function SmartHomeApp() {
   ];
   return (
     <ImageBackground
-      source={require("../assets/images/appBg.jpg")} // 👈 Use your background image path
+      source={require("../assets/images/appBg.jpg")}
       style={{ flex: 1, paddingTop: StatusBar.currentHeight }}
 
       // resizeMode="cover"

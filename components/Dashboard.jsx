@@ -9,7 +9,7 @@ export function Dashboard({ temperatureUnit, activeCounts, devices }) {
   const [weather, setWeather] = useState(null);
   const [userName, setUserName] = useState("");
   console.log("Devices and activecounts:------->", devices, activeCounts);
-  // Set greeting based on time
+
   useEffect(() => {
     const hour = new Date().getHours();
     if (hour < 12) setGreeting("Good Morning");
@@ -17,7 +17,6 @@ export function Dashboard({ temperatureUnit, activeCounts, devices }) {
     else setGreeting("Good Evening");
   }, []);
 
-  // Fetch Devices from Firestore
   useEffect(() => {
     const fetchDevices = async () => {
       try {
@@ -37,10 +36,9 @@ export function Dashboard({ temperatureUnit, activeCounts, devices }) {
   }, []);
   console.log("UserName", userName);
 
-  // Fetch Weather Data Using Location
   useEffect(() => {
     const fetchWeather = async () => {
-      const apiKey = "bb0b764f7e110d2504298f248ed60e5b"; // Replace with your OpenWeatherMap API key
+      const apiKey = "bb0b764f7e110d2504298f248ed60e5b";
       const fallbackCity = "London";
 
       const getWeatherByCoords = async (lat, lon) => {
@@ -109,13 +107,12 @@ export function Dashboard({ temperatureUnit, activeCounts, devices }) {
       case "Haze":
         return "🌫️";
       default:
-        return "🌈"; // fallback
+        return "🌈";
     }
   }
 
   return (
     <View style={styles.container}>
-      {/* Greeting */}
       <View style={styles.centerText}>
         <Text style={styles.greeting}>
           {greeting} {userName} 💫
@@ -123,9 +120,7 @@ export function Dashboard({ temperatureUnit, activeCounts, devices }) {
         <Text style={styles.subGreeting}>Welcome to your smart home</Text>
       </View>
 
-      {/* Cards */}
       <View style={styles.cardsContainer}>
-        {/* Weather */}
         <ImageBackground
           source={require("../assets/images/weatherBg.jpg")}
           style={{
@@ -146,7 +141,6 @@ export function Dashboard({ temperatureUnit, activeCounts, devices }) {
                 : "--°"}
             </Text>
 
-            {/* Weather condition text + emoji */}
             <Text style={styles.cardSub}>
               {weather?.condition
                 ? `${getWeatherEmoji(weather.condition)} ${weather.condition}`
@@ -155,7 +149,6 @@ export function Dashboard({ temperatureUnit, activeCounts, devices }) {
           </View>
         </ImageBackground>
 
-        {/* Active Devices */}
         <ImageBackground
           source={require("../assets/images/activeDevicesBg.jpg")}
           style={{
@@ -175,7 +168,6 @@ export function Dashboard({ temperatureUnit, activeCounts, devices }) {
           </View>
         </ImageBackground>
 
-        {/* Energy Usage */}
         <ImageBackground
           source={require("../assets/images/energyUsageBg.jpg")}
           style={{

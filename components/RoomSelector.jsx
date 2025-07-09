@@ -22,7 +22,6 @@ export function RoomSelector({
         showsHorizontalScrollIndicator={false}
         style={styles.scroll}
       >
-        {/* All Rooms Option */}
         <TouchableOpacity
           onPress={() => onRoomSelect(null)}
           style={[

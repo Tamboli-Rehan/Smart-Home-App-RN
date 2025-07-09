@@ -12,7 +12,7 @@ import {
 import Toast from "react-native-toast-message";
 import { SignInForm } from "../components/SignInForm";
 import { SmartHomeApp } from "../components/SmartHomeApp";
-import { auth } from "../config/firebaseConfig"; // Make sure firebaseConfig.js is correctly set up
+import { auth } from "../config/firebaseConfig";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -36,7 +36,7 @@ export default function App() {
       ) : (
         <ScrollView contentContainerStyle={styles.unauthWrapper}>
           <ImageBackground
-            source={require("../assets/images/signInBg.jpg")} // 👈 Use your background image path
+            source={require("../assets/images/signInBg.jpg")}
             style={{ flex: 1, paddingTop: StatusBar.currentHeight }}
             resizeMode="cover"
           >
@@ -65,7 +65,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#111827", // bg-gray-900
+    backgroundColor: "#111827",
   },
   unauthWrapper: {
     flexGrow: 1,

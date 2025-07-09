@@ -16,10 +16,10 @@ import Toast from "react-native-toast-message";
 import { auth, db } from "../config/firebaseConfig";
 
 export const SignInForm = () => {
-  const [step, setStep] = useState("signIn"); // or "signUp"
+  const [step, setStep] = useState("signIn");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState(""); // Only used in signUp
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
 
   const toggleStep = () =>
@@ -39,14 +39,11 @@ export const SignInForm = () => {
         );
         const user = userCredential.user;
         Toast.show({ type: "success", text1: "Account created successfully!" });
-        await setDoc(
-          doc(db, "users", user.uid), // Store user data in Firestore
-          {
-            name: name.trim(),
-            email: email.trim(),
-            createdAt: new Date().toISOString(),
-          }
-        );
+        await setDoc(doc(db, "users", user.uid), {
+          name: name.trim(),
+          email: email.trim(),
+          createdAt: new Date().toISOString(),
+        });
         console.log("User registered and data saved!");
       }
     } catch (error) {
